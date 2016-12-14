@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/app_dialog_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:textColor="@color/colorBlack"
+            android:textSize="@dimen/app_dialog_text_size"
+            android:textStyle="bold"
+            android:visibility="gone"
+            tools:text="Are you sure you want to end the session ?" />
+
+        <ImageView
+            android:id="@+id/dialog_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/app_dialog_image_margin"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dialog_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/app_dialog_button_layout_margin_bottom"
+            android:ellipsize="end"
+            android:textSize="@dimen/app_dialog_text_size"
+            android:visibility="gone"
+            tools:text="Are you sure you want to end the session ?" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/app_dialog_button_layout_margin_bottom"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/leftButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/app_dialog_button_right_margin"
+                android:layout_marginRight="@dimen/app_dialog_button_right_margin"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack"
+                android:visibility="gone"
+                tools:text="YES" />
+
+            <Button
+                android:id="@+id/rightButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack"
+                android:visibility="gone"
+                tools:text="NO" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="app_dialog_padding">24dp</dimen>
+    <dimen name="app_dialog_text_size">18sp</dimen>
+    <dimen name="app_dialog_button_layout_margin_bottom">10dp</dimen>
+    <dimen name="app_dialog_button_right_margin">20dp</dimen>
+    <dimen name="app_dialog_image_margin">20dp</dimen>
+
+</resources>
