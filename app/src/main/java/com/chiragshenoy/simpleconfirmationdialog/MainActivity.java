@@ -22,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         builder = new SimpleConfirmationDialog.SimpleConfirmationDialogBuilder(this);
-        builder.withTitle("Title");
-        builder.withDescription("Description");
-        builder.withLeftButton("left",listener);
-        builder.withRightButton("right",listener);
-        builder.build();
+        builder.withTitle("Title")
+                .withDescription("Description")
+                .withLeftButton("left",listener)
+                .withRightButton("right",listener).build();
+
         dialog = new SimpleConfirmationDialog(builder);
         dialog.show();
     }
