@@ -14,7 +14,7 @@ public class CustomDialog extends AppCompatDialog {
 
     private View view;
 
-    CustomDialog(Context context, View layout) {
+    public CustomDialog(Context context, View layout) {
         super(context);
         view = layout;
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);

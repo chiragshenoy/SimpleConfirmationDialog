@@ -1,12 +1,16 @@
 package com.chiragshenoy.simpleconifrmationdialog;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.chiragshenoy.simpleconifrmationdialog.utils.TypeFaceHelper;
 
 /**
  * Created by chiragshenoy on 14/12/16.
@@ -32,6 +36,9 @@ public class SimpleConfirmationDialog {
     private boolean showLeftButton = false;
     private boolean showRightButton = false;
 
+    private String typeface;
+    private Typeface font;
+
     public interface OnButtonClickListener {
         void onClick(View v, CustomDialog dialog);
     }
@@ -51,6 +58,8 @@ public class SimpleConfirmationDialog {
         this.rightButton = builder.rightButton;
         this.descriptionTextView = builder.descriptionTextView;
         this.imageView = builder.imageView;
+        this.typeface = builder.typeface;
+
         this.dialog = builder.dialog;
     }
 
@@ -75,7 +84,11 @@ public class SimpleConfirmationDialog {
     }
 
     public void show() {
-
+        if(typeface == null){
+            font = Typeface.create("sans-serif", Typeface.BOLD);
+        }else{
+            font = TypeFaceHelper.get(context,typeface);
+        }
         if (title != null && !title.isEmpty() && titleTextView != null) {
             titleTextView.setVisibility(View.VISIBLE);
 
@@ -84,6 +97,7 @@ public class SimpleConfirmationDialog {
             }
 
             titleTextView.setText(title);
+            titleTextView.setTypeface(font);
         }
 
 
@@ -95,21 +109,23 @@ public class SimpleConfirmationDialog {
             }
 
             descriptionTextView.setText(description);
+            descriptionTextView.setTypeface(font);
         }
 
         if (leftButton != null && showLeftButton) {
             leftButton.setVisibility(View.VISIBLE);
+            leftButton.setTypeface(font);
         }
 
         if (rightButton != null && showRightButton) {
             rightButton.setVisibility(View.VISIBLE);
+            rightButton.setTypeface(font);
         }
 
         if (imageResource != 0 && imageView != null) {
             imageView.setImageResource(imageResource);
             imageView.setVisibility(View.VISIBLE);
         }
-
         dialog.setCancelable(cancellable);
         dialog.show();
 
@@ -133,6 +149,9 @@ public class SimpleConfirmationDialog {
 
         private boolean showLeftButton = false;
         private boolean showRightButton = false;
+
+        private String typeface;
+
 
         private CustomDialog dialog;
 
@@ -192,6 +211,12 @@ public class SimpleConfirmationDialog {
             this.cancellable = cancellable;
             return this;
         }
+
+        public SimpleConfirmationDialogBuilder withTypeface(@Nullable String name){
+            this.typeface = name;
+            return this;
+        }
+
 
         private void setUpClickListenerAndText(Button Button, String text, final OnButtonClickListener onButtonClickListener) {
             Button.setOnClickListener(new View.OnClickListener() {

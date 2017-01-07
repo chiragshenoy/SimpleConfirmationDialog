@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.chiragshenoy.simpleconifrmationdialog.CustomDialog;
@@ -38,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         builder.withTitle("Title")
                 .withDescription("Description")
                 .withLeftButton("left", listener)
-                .withRightButton("right", listener).build();
+                .withRightButton("right", listener)
+                .withTypeface("AlexBrush-Regular.ttf").build();
 
         dialog = new SimpleConfirmationDialog(builder);
     }
