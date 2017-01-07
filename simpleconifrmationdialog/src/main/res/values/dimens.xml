@@ -7,4 +7,6 @@
     <dimen name="app_dialog_button_right_margin">20dp</dimen>
     <dimen name="app_dialog_image_margin">20dp</dimen>
 
+    <dimen name="default_rounded_edges_radius">15dp</dimen>
+
 </resources>

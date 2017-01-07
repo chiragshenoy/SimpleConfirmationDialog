@@ -1,6 +1,7 @@
 package com.chiragshenoy.simpleconifrmationdialog;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class SimpleConfirmationDialog {
 
     private boolean showLeftButton = false;
     private boolean showRightButton = false;
+    private boolean withRoundedEdges = false;
 
     public interface OnButtonClickListener {
         void onClick(View v, CustomDialog dialog);
@@ -52,6 +54,7 @@ public class SimpleConfirmationDialog {
         this.descriptionTextView = builder.descriptionTextView;
         this.imageView = builder.imageView;
         this.dialog = builder.dialog;
+        this.withRoundedEdges = builder.withRoundedEdges;
     }
 
     public String getTitle() {
@@ -85,6 +88,13 @@ public class SimpleConfirmationDialog {
 
             titleTextView.setText(title);
         }
+
+        if (withRoundedEdges) {
+            leftButton.setBackgroundResource(R.drawable.round_edge);
+        }
+
+        leftButton.getBackground().setColorFilter(context.getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
+        rightButton.getBackground().setColorFilter(context.getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
 
 
         if (description != null && !description.isEmpty() && descriptionTextView != null) {
@@ -133,6 +143,7 @@ public class SimpleConfirmationDialog {
 
         private boolean showLeftButton = false;
         private boolean showRightButton = false;
+        private boolean withRoundedEdges = false;
 
         private CustomDialog dialog;
 
@@ -190,6 +201,11 @@ public class SimpleConfirmationDialog {
 
         public SimpleConfirmationDialogBuilder isCancellable(boolean cancellable) {
             this.cancellable = cancellable;
+            return this;
+        }
+
+        public SimpleConfirmationDialogBuilder withRoundedEdges(boolean withRoundedEdges) {
+            this.withRoundedEdges = withRoundedEdges;
             return this;
         }
 

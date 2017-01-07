@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         builder.withTitle("Title")
                 .withDescription("Description")
                 .withLeftButton("left", listener)
+                .withRoundedEdges(true)
                 .withRightButton("right", listener).build();
 
         dialog = new SimpleConfirmationDialog(builder);

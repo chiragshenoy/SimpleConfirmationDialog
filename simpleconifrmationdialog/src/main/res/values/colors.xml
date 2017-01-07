@@ -2,5 +2,7 @@
 <resources>
 
     <color name="colorBlack">#000000</color>
+    <color name="defaultButtonColor">#e3e3e3</color>
+
 
 </resources>
