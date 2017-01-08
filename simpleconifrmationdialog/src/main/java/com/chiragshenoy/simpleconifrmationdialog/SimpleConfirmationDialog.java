@@ -2,6 +2,7 @@ package com.chiragshenoy.simpleconifrmationdialog;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -36,6 +37,9 @@ public class SimpleConfirmationDialog {
     private boolean showLeftButton = false;
     private boolean showRightButton = false;
 
+    private int positiveButtonSelector;
+    private int negativeButtonSelector;
+
     private String typeface;
     private Typeface font;
 
@@ -59,7 +63,8 @@ public class SimpleConfirmationDialog {
         this.descriptionTextView = builder.descriptionTextView;
         this.imageView = builder.imageView;
         this.typeface = builder.typeface;
-
+        this.positiveButtonSelector = builder.positiveButtonSelector;
+        this.negativeButtonSelector = builder.negativeButtonSelector;
         this.dialog = builder.dialog;
     }
 
@@ -84,10 +89,10 @@ public class SimpleConfirmationDialog {
     }
 
     public void show() {
-        if(typeface == null){
+        if (typeface == null) {
             font = Typeface.create("sans-serif", Typeface.BOLD);
-        }else{
-            font = TypeFaceHelper.get(context,typeface);
+        } else {
+            font = TypeFaceHelper.get(context, typeface);
         }
         if (title != null && !title.isEmpty() && titleTextView != null) {
             titleTextView.setVisibility(View.VISIBLE);
@@ -126,6 +131,12 @@ public class SimpleConfirmationDialog {
             imageView.setImageResource(imageResource);
             imageView.setVisibility(View.VISIBLE);
         }
+        if(positiveButtonSelector != 0){
+            rightButton.setBackgroundResource(positiveButtonSelector);
+        }
+        if(negativeButtonSelector != 0){
+            leftButton.setBackgroundResource(negativeButtonSelector);
+        }
         dialog.setCancelable(cancellable);
         dialog.show();
 
@@ -144,11 +155,16 @@ public class SimpleConfirmationDialog {
         private ImageView imageView;
 
         private int imageResource;
+        @DrawableRes
+        private int negativeButtonSelector;
+        @DrawableRes
+        private int positiveButtonSelector;
         private int titleColor;
         private int descriptionColor;
 
         private boolean showLeftButton = false;
         private boolean showRightButton = false;
+
 
         private String typeface;
 
@@ -212,8 +228,31 @@ public class SimpleConfirmationDialog {
             return this;
         }
 
-        public SimpleConfirmationDialogBuilder withTypeface(@Nullable String name){
+        public SimpleConfirmationDialogBuilder withTypeface(@Nullable String name) {
             this.typeface = name;
+            return this;
+        }
+
+        public SimpleConfirmationDialogBuilder withButtonSelector(@DrawableRes int drawableSelector) {
+            positiveButtonSelector = drawableSelector;
+            negativeButtonSelector = drawableSelector;
+            return this;
+        }
+
+
+        public SimpleConfirmationDialogBuilder withButtonSelector(@DrawableRes int drawableSelector, ConfirmationAction action) {
+            switch (action) {
+                default:
+                    positiveButtonSelector = drawableSelector;
+                    negativeButtonSelector = drawableSelector;
+                    break;
+                case POSITIVE:
+                    positiveButtonSelector = drawableSelector;
+                    break;
+                case NEGATIVE:
+                    negativeButtonSelector = drawableSelector;
+                    break;
+            }
             return this;
         }
 
