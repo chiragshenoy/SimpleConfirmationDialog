@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.chiragshenoy.simpleconifrmationdialog.ConfirmationAction;
 import com.chiragshenoy.simpleconifrmationdialog.CustomDialog;
 import com.chiragshenoy.simpleconifrmationdialog.SimpleConfirmationDialog;
 
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
                 .withDescription("Description")
                 .withLeftButton("left", listener)
                 .withRightButton("right", listener)
-                .withTypeface("AlexBrush-Regular.ttf").build();
+                .withButtonSelector(R.drawable.button_selector, ConfirmationAction.POSITIVE)
+                //use withButtonSelector(drawable) to add the same selector for both the buttons
+                .withTypeface("CaviarDreams.ttf").build();
 
         dialog = new SimpleConfirmationDialog(builder);
     }
