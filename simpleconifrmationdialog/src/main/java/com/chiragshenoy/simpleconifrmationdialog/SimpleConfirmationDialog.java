@@ -251,6 +251,7 @@ public class SimpleConfirmationDialog {
                     break;
                 case NEGATIVE:
                     negativeButtonSelector = drawableSelector;
+                    break;
             }
             return this;
         }
