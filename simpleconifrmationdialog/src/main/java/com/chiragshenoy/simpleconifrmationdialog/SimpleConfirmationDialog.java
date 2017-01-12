@@ -93,8 +93,8 @@ public class SimpleConfirmationDialog {
             leftButton.setBackgroundResource(R.drawable.round_edge);
         }
 
-        leftButton.getBackground().setColorFilter(context.getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
-        rightButton.getBackground().setColorFilter(context.getColor(R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
+        leftButton.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.defaultButtonColor), PorterDuff.Mode.SRC_ATOP);
+        rightButton.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
 
 
         if (description != null && !description.isEmpty() && descriptionTextView != null) {
