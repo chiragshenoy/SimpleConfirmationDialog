@@ -3,6 +3,7 @@ package com.chiragshenoy.simpleconifrmationdialog;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -42,6 +43,13 @@ public class SimpleConfirmationDialog {
     private int positiveButtonSelector;
     private int negativeButtonSelector;
 
+    private
+    @ColorRes
+    int leftButtonBackgroundColor;
+    private
+    @ColorRes
+    int rightButtonBackgroundColor;
+
     private String typeface;
     private Typeface font;
 
@@ -69,6 +77,8 @@ public class SimpleConfirmationDialog {
         this.negativeButtonSelector = builder.negativeButtonSelector;
         this.dialog = builder.dialog;
         this.withRoundedEdges = builder.withRoundedEdges;
+        this.leftButtonBackgroundColor = builder.leftButtonBackgroundColor;
+        this.rightButtonBackgroundColor = builder.rightButtonBackgroundColor;
     }
 
     public String getTitle() {
@@ -112,9 +122,13 @@ public class SimpleConfirmationDialog {
             leftButton.setBackgroundResource(R.drawable.round_edge);
         }
 
-        leftButton.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.defaultButtonColor), PorterDuff.Mode.SRC_ATOP);
-        rightButton.getBackground().setColorFilter(ContextCompat.getColor(context, R.color.colorBlack), PorterDuff.Mode.SRC_ATOP);
+        if (leftButtonBackgroundColor != 0) {
+            leftButton.getBackground().setColorFilter(ContextCompat.getColor(context, leftButtonBackgroundColor), PorterDuff.Mode.SRC_ATOP);
+        }
 
+        if (leftButtonBackgroundColor != 0) {
+            rightButton.getBackground().setColorFilter(ContextCompat.getColor(context, rightButtonBackgroundColor), PorterDuff.Mode.SRC_ATOP);
+        }
 
         if (description != null && !description.isEmpty() && descriptionTextView != null) {
             descriptionTextView.setVisibility(View.VISIBLE);
@@ -141,10 +155,10 @@ public class SimpleConfirmationDialog {
             imageView.setImageResource(imageResource);
             imageView.setVisibility(View.VISIBLE);
         }
-        if(positiveButtonSelector != 0){
+        if (positiveButtonSelector != 0) {
             rightButton.setBackgroundResource(positiveButtonSelector);
         }
-        if(negativeButtonSelector != 0){
+        if (negativeButtonSelector != 0) {
             leftButton.setBackgroundResource(negativeButtonSelector);
         }
         dialog.setCancelable(cancellable);
@@ -175,6 +189,13 @@ public class SimpleConfirmationDialog {
         private boolean showLeftButton = false;
         private boolean showRightButton = false;
         private boolean withRoundedEdges = false;
+
+        private
+        @ColorRes
+        int leftButtonBackgroundColor;
+        private
+        @ColorRes
+        int rightButtonBackgroundColor;
 
 
         private String typeface;
@@ -282,6 +303,17 @@ public class SimpleConfirmationDialog {
             });
             Button.setText(text);
         }
+
+        public SimpleConfirmationDialogBuilder withLeftButtonBackgroundColor(@ColorRes int color) {
+            this.leftButtonBackgroundColor = color;
+            return this;
+        }
+
+        public SimpleConfirmationDialogBuilder withRightButtonBackgroundColor(@ColorRes int color) {
+            this.rightButtonBackgroundColor = color;
+            return this;
+        }
+
     }
 
 }

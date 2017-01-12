@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 //use withButtonSelector(drawable) to add the same selector for both the buttons
                 .withTypeface("CaviarDreams.ttf")
                 .withRoundedEdges(true)
+                .withLeftButtonBackgroundColor(R.color.md_amber_200)
+                .withRightButtonBackgroundColor(R.color.md_pink_700)
                 .withRightButton("right", listener).build();
 
         dialog = new SimpleConfirmationDialog(builder);
