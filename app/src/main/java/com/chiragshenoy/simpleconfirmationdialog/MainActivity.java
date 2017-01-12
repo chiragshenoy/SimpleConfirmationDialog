@@ -4,9 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.chiragshenoy.simpleconifrmationdialog.ConfirmationAction;
 import com.chiragshenoy.simpleconifrmationdialog.CustomDialog;
 import com.chiragshenoy.simpleconifrmationdialog.SimpleConfirmationDialog;
 
@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
         builder.withTitle("Title")
                 .withDescription("Description")
                 .withLeftButton("left", listener)
+                .withRightButton("right", listener)
+                .withButtonSelector(R.drawable.button_selector, ConfirmationAction.POSITIVE)
+                //use withButtonSelector(drawable) to add the same selector for both the buttons
+                .withTypeface("CaviarDreams.ttf")
                 .withRoundedEdges(true)
                 .withRightButton("right", listener).build();
 

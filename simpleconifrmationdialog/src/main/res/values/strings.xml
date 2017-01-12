@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SimpleConifrmationDialog</string>
+    <string name="Positive">POSITIVE</string>
+    <string name="Negative">NEGATIVE</string>
 </resources>

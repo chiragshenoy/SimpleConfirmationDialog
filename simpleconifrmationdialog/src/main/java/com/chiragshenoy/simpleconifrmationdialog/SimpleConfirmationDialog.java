@@ -2,12 +2,17 @@ package com.chiragshenoy.simpleconifrmationdialog;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.chiragshenoy.simpleconifrmationdialog.utils.TypeFaceHelper;
 
 /**
  * Created by chiragshenoy on 14/12/16.
@@ -34,6 +39,12 @@ public class SimpleConfirmationDialog {
     private boolean showRightButton = false;
     private boolean withRoundedEdges = false;
 
+    private int positiveButtonSelector;
+    private int negativeButtonSelector;
+
+    private String typeface;
+    private Typeface font;
+
     public interface OnButtonClickListener {
         void onClick(View v, CustomDialog dialog);
     }
@@ -53,6 +64,9 @@ public class SimpleConfirmationDialog {
         this.rightButton = builder.rightButton;
         this.descriptionTextView = builder.descriptionTextView;
         this.imageView = builder.imageView;
+        this.typeface = builder.typeface;
+        this.positiveButtonSelector = builder.positiveButtonSelector;
+        this.negativeButtonSelector = builder.negativeButtonSelector;
         this.dialog = builder.dialog;
         this.withRoundedEdges = builder.withRoundedEdges;
     }
@@ -78,7 +92,11 @@ public class SimpleConfirmationDialog {
     }
 
     public void show() {
-
+        if (typeface == null) {
+            font = Typeface.create("sans-serif", Typeface.BOLD);
+        } else {
+            font = TypeFaceHelper.get(context, typeface);
+        }
         if (title != null && !title.isEmpty() && titleTextView != null) {
             titleTextView.setVisibility(View.VISIBLE);
 
@@ -87,6 +105,7 @@ public class SimpleConfirmationDialog {
             }
 
             titleTextView.setText(title);
+            titleTextView.setTypeface(font);
         }
 
         if (withRoundedEdges) {
@@ -105,21 +124,29 @@ public class SimpleConfirmationDialog {
             }
 
             descriptionTextView.setText(description);
+            descriptionTextView.setTypeface(font);
         }
 
         if (leftButton != null && showLeftButton) {
             leftButton.setVisibility(View.VISIBLE);
+            leftButton.setTypeface(font);
         }
 
         if (rightButton != null && showRightButton) {
             rightButton.setVisibility(View.VISIBLE);
+            rightButton.setTypeface(font);
         }
 
         if (imageResource != 0 && imageView != null) {
             imageView.setImageResource(imageResource);
             imageView.setVisibility(View.VISIBLE);
         }
-
+        if(positiveButtonSelector != 0){
+            rightButton.setBackgroundResource(positiveButtonSelector);
+        }
+        if(negativeButtonSelector != 0){
+            leftButton.setBackgroundResource(negativeButtonSelector);
+        }
         dialog.setCancelable(cancellable);
         dialog.show();
 
@@ -138,12 +165,20 @@ public class SimpleConfirmationDialog {
         private ImageView imageView;
 
         private int imageResource;
+        @DrawableRes
+        private int negativeButtonSelector;
+        @DrawableRes
+        private int positiveButtonSelector;
         private int titleColor;
         private int descriptionColor;
 
         private boolean showLeftButton = false;
         private boolean showRightButton = false;
         private boolean withRoundedEdges = false;
+
+
+        private String typeface;
+
 
         private CustomDialog dialog;
 
@@ -208,6 +243,35 @@ public class SimpleConfirmationDialog {
             this.withRoundedEdges = withRoundedEdges;
             return this;
         }
+
+        public SimpleConfirmationDialogBuilder withTypeface(@Nullable String name) {
+            this.typeface = name;
+            return this;
+        }
+
+        public SimpleConfirmationDialogBuilder withButtonSelector(@DrawableRes int drawableSelector) {
+            positiveButtonSelector = drawableSelector;
+            negativeButtonSelector = drawableSelector;
+            return this;
+        }
+
+
+        public SimpleConfirmationDialogBuilder withButtonSelector(@DrawableRes int drawableSelector, ConfirmationAction action) {
+            switch (action) {
+                default:
+                    positiveButtonSelector = drawableSelector;
+                    negativeButtonSelector = drawableSelector;
+                    break;
+                case POSITIVE:
+                    positiveButtonSelector = drawableSelector;
+                    break;
+                case NEGATIVE:
+                    negativeButtonSelector = drawableSelector;
+                    break;
+            }
+            return this;
+        }
+
 
         private void setUpClickListenerAndText(Button Button, String text, final OnButtonClickListener onButtonClickListener) {
             Button.setOnClickListener(new View.OnClickListener() {
